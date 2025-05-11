@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> My Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #fff5f5;
+      --secondary: #ffb4b4;
+      --accent: #f2ff40;
+      --text: #ffffff;
+      --bg: #292929;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: var(--secondary);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      background: var(--bg);
+      box-shadow: 0 2px 8px rgba(45,108,223,0.05);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+   
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 6rem 0 4rem 0;
+      min-height: 60vh;
+    }
+    .hero-text {
+      flex: 1 1 350px;
+      animation: fadeInLeft 1s;
+    }
+    .hero-text h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem;
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #000000;
+    }
+    .hero-text .cta {
+      background: var(--primary);
+      color: #4d4d4d;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(45,108,223,0.10);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-text .cta:hover {
+      background: var(--accent);
+      color: #222;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .hero-img {
+      flex: 1 1 300px;
+      text-align: right;
+      animation: fadeInRight 1s;
+    }
+    .hero-img img {
+      max-width: 320px;
+      width: 90%;
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(45,108,223,0.10);
+      border: 6px solid var(--primary);
+      background: #000000;
+    }
+   
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      margin: 6rem 0 4rem 0;
+    }
+    .about-text {
+      flex: 2 1 300px;
+    }
+    .about-text h2 {
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1rem;
+    }
+    .about-text p {
+      color: #555555;
+      font-size: 1.1rem;
+    }
+    .skills {
+      flex: 1 1 200px;
+      background: var(--bg);
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(45,108,223,0.07);
+      padding: 1.5rem;
+    }
+    .skills h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .skill-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .skill-list li {
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+    }
+    .skill-list li::before {
+      content: '✔';
+      color: var(--accent);
+      margin-right: 0.7rem;
+      font-size: 1.1rem;
+    }
+    
+    .projects {
+      margin: 6rem 0 4rem 0;
+    }
+    .projects h2 {
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: var(--bg);
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(45,108,223,0.08);
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeInUp 1s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(45,108,223,0.13);
+    }
+    .project-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      object-fit: cover;
+      background: #333;
+    }
+    .project-card h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .project-card p {
+      color: #ffffff;
+      flex: 1;
+    }
+    .project-card a {
+      margin-top: 1rem;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .project-card a:hover {
+      color: var(--primary);
+    }
+
+    .contact {
+      margin: 6rem 0 4rem 0;
+      background: var(--bg);
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(45,108,223,0.07);
+      padding: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s;
+    }
+    .contact h2 {
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact input, .contact textarea {
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #dbeafe;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #f5f7fa;
+      resize: none;
+    }
+    .contact button {
+      background: var(--primary);
+      color: #000000;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(45,108,223,0.10);
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-end;
+    }
+    .contact button:hover {
+      background: var(--accent);
+      color: #222;
+      transform: translateY(-2px) scale(1.04);
+    }
+    
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem 0;
+      color: #888;
+      font-size: 1rem;
+      background: var(--bg);
+      margin-top: 3rem;
+    }
+    
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    
+    @media (max-width: 900px) {
+      .hero, .about {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-img, .about-img {
+        text-align: center;
+        margin-top: 2rem;
+      }
+      .hero-img img {
+        margin: 0 auto;
+      }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 1rem; }
+      .hero-text h1 { font-size: 2rem; }
+      .about-text h2, .projects h2, .contact h2 { font-size: 1.3rem; }
+      .project-card { padding: 1rem; }
+      .skills { padding: 1rem; }
+      .contact { padding: 1rem; }
+    }
+    .section-divider {
+      border: none;
+      height: 3px;
+      width: 60%;
+      margin: 4rem auto;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Desiree Yu Umpad</div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+     
+      <section class="hero" id="home">
+        <div class="hero-text">
+          <h1>Greetings, I'm Desiree Yu Umpad</h1>
+          <p>A dedicated <b>First year student</b> from Global Reciprocal Colleges with a strong foundation in traditional values and a conservative perspective. </p>
+          <a href="#contact"><button class="cta">Contact Me</button></a>
+        </div>
+        <div class="hero-img">
+          <img src="d53708e9-9e55-4baa-8ddc-8a81199c193a.jpg" alt="Profile Photo">
+        </div>
+      </section>
+      <hr class="section-divider">
+      <section class="about" id="about">
+        <div class="about-text">
+          <h2>About Me</h2>
+          <p>
+            I'm passionate about learning and personal growth, and I'm excited to share my ideas and perspectives with others.
+          </p>
+        </div>
+        <div class="skills">
+          <h3>Skills</h3>
+          <ul class="skill-list">
+            <li>Dancer</li>
+            <li>Photography</li>
+            <li>Videography</li>
+            <li>Editing</li>
+            <li>Gamer</li>
+            <li>Martial Artist</li>
+          </ul>
+        </div>
+      </section>
+      <hr class="section-divider">
+      <section class="projects" id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <img src="nameicon.jpg" alt="Modern Portfolio" class="project-image">
+            <h3>Name Icons</h3>
+            <a href="#" target="_blank">View Project &rarr;</a>
+          </div>
+          <div class="project-card">
+            <img src="IMMERSION.jpg" alt="E-commerce Project" class="project-image">
+            <h3>Community Service</h3>
+            <a href="#" target="_blank">View Project &rarr;</a>
+          </div>
+          <div class="project-card">
+            <img src="FBPOSTER.jpg" alt="Blog CMS" class="project-image">
+            <h3>Facebook Poster</h3>
+            <a href="#" target="_blank">View Project &rarr;</a>
+          </div>
+        </div>
+      </section>
+     
+      <section class="contact" id="contact">
+        <h2>Contact Me</h2>
+        <form>
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 Umpad. All rights reserved.
+  </footer>
+</body>
+</html>
